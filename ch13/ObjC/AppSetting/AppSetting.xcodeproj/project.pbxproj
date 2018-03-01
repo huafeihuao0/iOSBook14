@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4BDBFD8E204821C40017D1D3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BDBFD8D204821C40017D1D3 /* ViewController.m */; };
 		EADBCA4D1C38BC71007ADDF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EADBCA4C1C38BC71007ADDF9 /* main.m */; };
 		EADBCA501C38BC71007ADDF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EADBCA4F1C38BC71007ADDF9 /* AppDelegate.m */; };
-		EADBCA531C38BC71007ADDF9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EADBCA521C38BC71007ADDF9 /* ViewController.m */; };
 		EADBCA561C38BC71007ADDF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EADBCA541C38BC71007ADDF9 /* Main.storyboard */; };
 		EADBCA581C38BC71007ADDF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EADBCA571C38BC71007ADDF9 /* Assets.xcassets */; };
 		EADBCA5B1C38BC71007ADDF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EADBCA591C38BC71007ADDF9 /* LaunchScreen.storyboard */; };
@@ -17,12 +17,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4BDBFD8C204821C40017D1D3 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		4BDBFD8D204821C40017D1D3 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		EADBCA481C38BC71007ADDF9 /* AppSetting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppSetting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EADBCA4C1C38BC71007ADDF9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EADBCA4E1C38BC71007ADDF9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EADBCA4F1C38BC71007ADDF9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		EADBCA511C38BC71007ADDF9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		EADBCA521C38BC71007ADDF9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		EADBCA551C38BC71007ADDF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EADBCA571C38BC71007ADDF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EADBCA5A1C38BC71007ADDF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -41,6 +41,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4BDBFD8B204821C40017D1D3 /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				4BDBFD8C204821C40017D1D3 /* ViewController.h */,
+				4BDBFD8D204821C40017D1D3 /* ViewController.m */,
+			);
+			path = VCs;
+			sourceTree = "<group>";
+		};
 		EADBCA3F1C38BC71007ADDF9 = {
 			isa = PBXGroup;
 			children = (
@@ -60,10 +69,9 @@
 		EADBCA4A1C38BC71007ADDF9 /* AppSetting */ = {
 			isa = PBXGroup;
 			children = (
+				4BDBFD8B204821C40017D1D3 /* VCs */,
 				EADBCA4E1C38BC71007ADDF9 /* AppDelegate.h */,
 				EADBCA4F1C38BC71007ADDF9 /* AppDelegate.m */,
-				EADBCA511C38BC71007ADDF9 /* ViewController.h */,
-				EADBCA521C38BC71007ADDF9 /* ViewController.m */,
 				EADBCA541C38BC71007ADDF9 /* Main.storyboard */,
 				EADBCA621C38BD0B007ADDF9 /* Settings.bundle */,
 				EADBCA571C38BC71007ADDF9 /* Assets.xcassets */,
@@ -108,7 +116,7 @@
 		EADBCA401C38BC71007ADDF9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = tony;
 				TargetAttributes = {
 					EADBCA471C38BC71007ADDF9 = {
@@ -153,7 +161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EADBCA531C38BC71007ADDF9 /* ViewController.m in Sources */,
+				4BDBFD8E204821C40017D1D3 /* ViewController.m in Sources */,
 				EADBCA501C38BC71007ADDF9 /* AppDelegate.m in Sources */,
 				EADBCA4D1C38BC71007ADDF9 /* main.m in Sources */,
 			);
@@ -189,13 +197,21 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -232,13 +248,21 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -302,6 +326,7 @@
 				EADBCA611C38BC71007ADDF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

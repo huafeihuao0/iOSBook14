@@ -2,123 +2,136 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <!--  配资指示器  -->
 	<key>PreferenceSpecifiers</key>
 	<array>
-		<dict>
+        <!--    【账户组】    -->
+        <dict>
+            <key>Type</key>
+            <string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>账户</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
 		</dict>
+                <!--  用户名     -->
 		<dict>
+            <key>Type</key>
+            <string>PSTextFieldSpecifier</string>
+            <key>Title</key>
+            <string>用户名</string>
+            <key>Key</key>
+            <string>name_preference</string>
+            <string>No</string>
+            <key>DefaultValue</key>
+            <string></string>
+            <key>KeyboardType</key>
+            <string>Alphabet</string>
 			<key>AutocapitalizationType</key>
 			<string>None</string>
 			<key>AutocorrectionType</key>
-			<string>No</string>
-			<key>DefaultValue</key>
-			<string></string>
 			<key>IsSecure</key>
 			<false/>
-			<key>Key</key>
-			<string>name_preference</string>
-			<key>KeyboardType</key>
-			<string>Alphabet</string>
-			<key>Title</key>
-			<string>用户名</string>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
 		</dict>
+            <!--   密码     -->
 		<dict>
+            <key>Type</key>
+            <string>PSTextFieldSpecifier</string>
+            <key>Title</key>
+            <string>密码</string>
+            <key>Key</key>
+            <string>password_preference</string>
+            <key>DefaultValue</key>
+            <string></string>
+            <key>KeyboardType</key>
+            <string>Alphabet</string>
 			<key>AutocapitalizationType</key>
 			<string>None</string>
 			<key>AutocorrectionType</key>
 			<string>No</string>
-			<key>DefaultValue</key>
-			<string></string>
 			<key>IsSecure</key>
 			<true/>
-			<key>Key</key>
-			<string>password_preference</string>
-			<key>KeyboardType</key>
-			<string>Alphabet</string>
-			<key>Title</key>
-			<string>密码</string>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
 		</dict>
+        <!--    【无名分组】    -->
 		<dict>
+            <key>Type</key>
+            <string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string> </string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
 		</dict>
+            <!--    缓存开关    -->
 		<dict>
+            <key>Type</key>
+            <string>PSToggleSwitchSpecifier</string>
+            <key>Title</key>
+            <string>每月是否清除缓存</string>
+            <key>Key</key>
+            <string>enabled_preference</string>
 			<key>DefaultValue</key>
 			<true/>
-			<key>Key</key>
-			<string>enabled_preference</string>
-			<key>Title</key>
-			<string>每月是否清除缓存</string>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
 		</dict>
+        <!--    【流量限制分组】    -->
 		<dict>
+            <key>Type</key>
+            <string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>每月流量限制（GB）</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
 		</dict>
+            <!--    流量控制条    -->
 		<dict>
+            <key>Type</key>
+            <string>PSSliderSpecifier</string>
+            <key>Key</key>
+            <string>slider_preference</string>
 			<key>DefaultValue</key>
 			<real>0.5</real>
-			<key>Key</key>
-			<string>slider_preference</string>
 			<key>MaximumValue</key>
 			<integer>1</integer>
+            <key>MinimumValue</key>
+            <integer>0</integer>
 			<key>MaximumValueImage</key>
 			<string>elephant.png</string>
-			<key>MinimumValue</key>
-			<integer>0</integer>
 			<key>MinimumValueImage</key>
 			<string>mouse.png</string>
-			<key>Type</key>
-			<string>PSSliderSpecifier</string>
 		</dict>
+        <!--    【无名分组】    -->
 		<dict>
 			<key>Title</key>
 			<string> </string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
+        <!--    服务器选择列表   -->
 		<dict>
+            <key>Type</key>
+            <string>PSMultiValueSpecifier</string>
+            <key>Title</key>
+            <string>服务器</string>
+            <key>Key</key>
+            <string>multivaule_preference</string>
+            <key>DefaultValue</key>
+            <string>上海服务器</string>
+            <key>Titles</key>
+                <!--      题目组      -->
+            <array>
+                <string>上海服务器</string>
+                <string>北京服务器</string>
+                <string>广州服务器</string>
+            </array>
+                <!--     值集       -->
 			<key>Values</key>
 			<array>
 				<string>上海服务器</string>
 				<string>北京服务器</string>
 				<string>广州服务器</string>
 			</array>
-			<key>Type</key>
-			<string>PSMultiValueSpecifier</string>
-			<key>Title</key>
-			<string>服务器</string>
-			<key>Titles</key>
-			<array>
-				<string>上海服务器</string>
-				<string>北京服务器</string>
-				<string>广州服务器</string>
-			</array>
-			<key>Key</key>
-			<string>multivaule_preference</string>
-			<key>DefaultValue</key>
-			<string>上海服务器</string>
 		</dict>
+                <!--    通知子选择面板    -->
 		<dict>
-			<key>File</key>
-			<string>Notification</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 			<key>Title</key>
 			<string>通知</string>
+            <key>File</key>
+            <string>Notification</string>
 		</dict>
 	</array>
 	<key>StringsTable</key>
