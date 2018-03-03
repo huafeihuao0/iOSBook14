@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		EA0C2E661C3A3D0600363F79 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0C2E651C3A3D0600363F79 /* main.m */; };
 		EA0C2E691C3A3D0600363F79 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0C2E681C3A3D0600363F79 /* AppDelegate.m */; };
-		EA0C2E6C1C3A3D0600363F79 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0C2E6B1C3A3D0600363F79 /* ViewController.m */; };
+		EA0C2E6C1C3A3D0600363F79 /* KKContactsTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0C2E6B1C3A3D0600363F79 /* KKContactsTableVC.m */; };
 		EA0C2E6F1C3A3D0600363F79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA0C2E6D1C3A3D0600363F79 /* Main.storyboard */; };
 		EA0C2E711C3A3D0600363F79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA0C2E701C3A3D0600363F79 /* Assets.xcassets */; };
 		EA0C2E741C3A3D0600363F79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA0C2E721C3A3D0600363F79 /* LaunchScreen.storyboard */; };
@@ -21,8 +21,8 @@
 		EA0C2E651C3A3D0600363F79 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EA0C2E671C3A3D0600363F79 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		EA0C2E681C3A3D0600363F79 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		EA0C2E6A1C3A3D0600363F79 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		EA0C2E6B1C3A3D0600363F79 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EA0C2E6A1C3A3D0600363F79 /* KKContactsTableVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKContactsTableVC.h; sourceTree = "<group>"; };
+		EA0C2E6B1C3A3D0600363F79 /* KKContactsTableVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKContactsTableVC.m; sourceTree = "<group>"; };
 		EA0C2E6E1C3A3D0600363F79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EA0C2E701C3A3D0600363F79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA0C2E731C3A3D0600363F79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -42,6 +42,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4CD28F12204A401800897894 /* vcs */ = {
+			isa = PBXGroup;
+			children = (
+				EA0C2E6A1C3A3D0600363F79 /* KKContactsTableVC.h */,
+				EA0C2E6B1C3A3D0600363F79 /* KKContactsTableVC.m */,
+				EA0C2E7B1C3A5DC400363F79 /* DetailViewController.h */,
+				EA0C2E7C1C3A5DC400363F79 /* DetailViewController.m */,
+			);
+			path = vcs;
+			sourceTree = "<group>";
+		};
 		EA0C2E581C3A3D0600363F79 = {
 			isa = PBXGroup;
 			children = (
@@ -61,12 +72,9 @@
 		EA0C2E631C3A3D0600363F79 /* Read_Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				4CD28F12204A401800897894 /* vcs */,
 				EA0C2E671C3A3D0600363F79 /* AppDelegate.h */,
 				EA0C2E681C3A3D0600363F79 /* AppDelegate.m */,
-				EA0C2E6A1C3A3D0600363F79 /* ViewController.h */,
-				EA0C2E6B1C3A3D0600363F79 /* ViewController.m */,
-				EA0C2E7B1C3A5DC400363F79 /* DetailViewController.h */,
-				EA0C2E7C1C3A5DC400363F79 /* DetailViewController.m */,
 				EA0C2E6D1C3A3D0600363F79 /* Main.storyboard */,
 				EA0C2E701C3A3D0600363F79 /* Assets.xcassets */,
 				EA0C2E721C3A3D0600363F79 /* LaunchScreen.storyboard */,
@@ -154,7 +162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA0C2E6C1C3A3D0600363F79 /* ViewController.m in Sources */,
+				EA0C2E6C1C3A3D0600363F79 /* KKContactsTableVC.m in Sources */,
 				EA0C2E691C3A3D0600363F79 /* AppDelegate.m in Sources */,
 				EA0C2E661C3A3D0600363F79 /* main.m in Sources */,
 				EA0C2E7D1C3A5DC400363F79 /* DetailViewController.m in Sources */,
@@ -304,6 +312,7 @@
 				EA0C2E7A1C3A3D0600363F79 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
