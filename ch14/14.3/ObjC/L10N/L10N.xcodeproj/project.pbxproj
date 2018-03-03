@@ -48,6 +48,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4CD28F11204A2D0F00897894 /* vcs */ = {
+			isa = PBXGroup;
+			children = (
+				EADBCAE81C397AC7007ADDF9 /* ViewController.h */,
+				EADBCAE91C397AC7007ADDF9 /* ViewController.m */,
+			);
+			path = vcs;
+			sourceTree = "<group>";
+		};
 		EADBCAD61C397AC7007ADDF9 = {
 			isa = PBXGroup;
 			children = (
@@ -67,10 +76,9 @@
 		EADBCAE11C397AC7007ADDF9 /* L10N */ = {
 			isa = PBXGroup;
 			children = (
+				4CD28F11204A2D0F00897894 /* vcs */,
 				EADBCAE51C397AC7007ADDF9 /* AppDelegate.h */,
 				EADBCAE61C397AC7007ADDF9 /* AppDelegate.m */,
-				EADBCAE81C397AC7007ADDF9 /* ViewController.h */,
-				EADBCAE91C397AC7007ADDF9 /* ViewController.m */,
 				EADBCAEB1C397AC7007ADDF9 /* Main.storyboard */,
 				EADBCAEE1C397AC7007ADDF9 /* Assets.xcassets */,
 				EADBCAF01C397AC7007ADDF9 /* LaunchScreen.storyboard */,
