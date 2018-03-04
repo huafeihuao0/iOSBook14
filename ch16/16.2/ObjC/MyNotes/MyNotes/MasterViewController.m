@@ -27,6 +27,7 @@
 
     self.detailViewController = (DetailViewController *) [[self.splitViewController.viewControllers lastObject] topViewController];
 
+    //注册通知监听器
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadView:)
                                                  name:@"reloadViewNotification"
@@ -35,7 +36,7 @@
     NotesTBXMLParser *parser = [[NotesTBXMLParser alloc] init];
 //    NotesXMLParser *parser = [[NotesXMLParser alloc] init];
     //开始解析
-    [parser start];
+    [parser startParser];
 
 }
 

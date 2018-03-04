@@ -1,16 +1,3 @@
-//
-//  NotesTBXMLParser.m
-//  MyNotes
-//
-//  Created by 关东升 on 16/1/9.
-//  本书网站：http://www.51work6.com
-//  智捷课堂在线课堂：http://www.zhijieketang.com/
-//  智捷课堂微信公共号：zhijieketang
-//  作者微博：@tony_关东升
-//  作者微信：tony关东升
-//  QQ：569418560 邮箱：eorient@sina.com
-//  QQ交流群：162030268
-//
 
 #import "NotesTBXMLParser.h"
 
@@ -18,55 +5,72 @@
 @implementation NotesTBXMLParser
 
 //开始解析
--(void)start {
-    
+-(void)startParser
+{
+    //初始化解析数据的容器
     self.listData = [[NSMutableArray alloc] init];
     
-    TBXML* tbxml = [[TBXML alloc] initWithXMLFile:@"Notes.xml" error:nil];
+    //初始化TBXML解析器
+    TBXML* tbxmlParser = [[TBXML alloc] initWithXMLFile:@"Notes.xml"
+                                            error:nil];
     
-    TBXMLElement * root = tbxml.rootXMLElement;
+    TBXMLElement * rootEle = tbxmlParser.rootXMLElement;//获取根元素，作为最高父节点
     
 	// 如果root元素有效
-	if (root) {
+	if (rootEle)
+    {
         
-		TBXMLElement * noteElement = [TBXML childElementNamed:@"Note" parentElement:root];
+		TBXMLElement * noteElement = [TBXML childElementNamed:@"Note" parentElement:rootEle];
         
-        while ( noteElement != nil) {
+        while ( noteElement != nil)
+        {
+            //实例化note字典
+            NSMutableDictionary *noteDict = [NSMutableDictionary new];
             
-            NSMutableDictionary *dict = [NSMutableDictionary new];
-            
-            TBXMLElement *dateElement = [TBXML childElementNamed:@"CDate" parentElement:noteElement];
-            if ( dateElement != nil) {
-                NSString *date = [TBXML textForElement:dateElement];
-                dict[@"CDate"] = date;
+            //解析note子元素cdate
+            TBXMLElement *dateElement = [TBXML childElementNamed:@"CDate"
+                                                   parentElement:noteElement];
+            if ( dateElement != nil)
+            {
+                NSString *date = [TBXML textForElement:dateElement];//获取cdate文本内容
+                noteDict[@"CDate"] = date;
             }
             
-            TBXMLElement *contentElement = [TBXML childElementNamed:@"Content" parentElement:noteElement];
-            if ( contentElement != nil) {
+            //解析note子元素content
+            TBXMLElement *contentElement = [TBXML childElementNamed:@"Content"
+                                                      parentElement:noteElement];
+            if ( contentElement != nil)
+            {
                 NSString *content = [TBXML textForElement:contentElement];
-                dict[@"Content"] = content;
+                noteDict[@"Content"] = content;
             }
             
+            //解析note子元素
             TBXMLElement *userIDElement = [TBXML childElementNamed:@"UserID" parentElement:noteElement];
-            if ( userIDElement != nil) {
+            if ( userIDElement != nil)
+            {
                 NSString *userID = [TBXML textForElement:userIDElement];
-                dict[@"UserID"] = userID;
+                noteDict[@"UserID"] = userID;
             }
             
             //获得ID属性
             NSString *identifier = [TBXML valueOfAttributeNamed:@"id" forElement:noteElement error:nil];
-            dict[@"id"] = identifier;
+            noteDict[@"id"] = identifier;
             
-            [self.listData addObject:dict];
+            [self.listData addObject:noteDict];
             
-            noteElement = [TBXML nextSiblingNamed:@"Note" searchFromElement:noteElement];
+            //继续遍历下一个兄弟节点
+            noteElement = [TBXML nextSiblingNamed:@"Note"
+                                searchFromElement:noteElement];
             
 		}
     }
     
     NSLog(@"TBXML解析完成...");
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadViewNotification" object:self.listData userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadViewNotification"
+                                                        object:self.listData
+                                                      userInfo:nil];
     self.listData = nil;
     
 }

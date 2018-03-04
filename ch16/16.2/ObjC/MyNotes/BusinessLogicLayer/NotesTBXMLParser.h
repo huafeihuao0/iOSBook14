@@ -20,6 +20,6 @@
 @property (strong,nonatomic) NSMutableArray *listData;
 
 //开始解析
--(void)start;
+-(void)startParser;
 
 @end
