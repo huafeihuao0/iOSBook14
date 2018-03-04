@@ -1,63 +1,20 @@
-//
-//  MasterViewController.m
-//  MyNotes
-//
-//  Created by 关东升 on 15/12/31.
-//  本书网站：http://www.51work6.com
-//  智捷课堂在线课堂：http://www.zhijieketang.com/
-//  智捷课堂微信公共号：zhijieketang
-//  作者微博：@tony_关东升
-//  作者微信：tony关东升
-//  QQ：569418560 邮箱：eorient@sina.com
-//  QQ交流群：162030268
-//
-
 #import "MasterViewController.h"
 #import "DetailViewController.h"
 
 @implementation MasterViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     self.detailViewController = (DetailViewController *) [[self.splitViewController.viewControllers lastObject] topViewController];
 
-    [self startRequest];
+    //使用简单会话发送get型请求
+    [self getRequBySimpleSess];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-#pragma mark - 开始请求Web Service
 
-- (void)startRequest {
-
-    NSString *strURL = [[NSString alloc] initWithFormat:@"http://www.51work6.com/service/mynotes/WebService.php?email=%@&type=%@&action=%@", @"<你的51work6.com用户邮箱>", @"JSON", @"query"];
-
-    strURL = [strURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-
-    NSURL *url = [NSURL URLWithString:strURL];
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:
-        ^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSLog(@"请求完成...");
-        if (!error) {
-            NSDictionary *resDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self reloadView:resDict];
-            });
-        } else {
-            NSLog(@"error : %@", error.localizedDescription);
-        }
-    }];
-
-    [task resume];
-
-}
 
 #pragma mark - Segues
 
@@ -89,8 +46,9 @@
     return cell;
 }
 
-#pragma mark - 重新加载表视图
-
+/***
+ * 重新加载表视图
+ ****/
 - (void)reloadView:(NSDictionary *)res {
 
     NSNumber *resultCode = res[@"ResultCode"];
@@ -108,5 +66,57 @@
     }
 }
 
+#pragma mark --  【DAO】
+/***
+ * 构建get请求对象
+ ****/
+- (NSURLRequest *)makeupGetRequ
+{
+    //请求地址字符串
+    NSString *requStrMainStr=@"http://www.51work6.com/service/mynotes/WebService.php?email=%@&type=%@&action=%@";
+    NSString *requUrlStr = [[NSString alloc] initWithFormat:requStrMainStr, @"<你的51work6.com用户邮箱>", @"JSON", @"query"];
+    //url地址百分号编码
+    requUrlStr = [requUrlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSURL *requUrl = [NSURL URLWithString:requUrlStr];
+    
+    //实例化请求对象
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:requUrl];
+    return request;
+}
 
+/***
+ *  使用简单会话发送get型请求
+ ****/
+- (void)getRequBySimpleSess
+{
+    //构建get请求对象
+    NSURLRequest * getRequ = [self makeupGetRequ];
+    
+    //实例化简单的共享会话单例
+    NSURLSession *sharedSess = [NSURLSession sharedSession];
+    id onCompleted=^(NSData *data, NSURLResponse *response, NSError *error)
+    {
+        NSLog(@"请求完成...");
+        if (!error)
+        {
+            NSDictionary *resDict = [NSJSONSerialization JSONObjectWithData:data
+                                                                    options:NSJSONReadingAllowFragments
+                                                                    error:nil];
+            //主队列更新表格
+            dispatch_async(dispatch_get_main_queue(), ^
+            {
+                [self reloadView:resDict];
+            });
+        } else
+        {
+            NSLog(@"error : %@", error.localizedDescription);
+        }
+    };
+    
+    //创建get型请求任务
+    NSURLSessionDataTask *getRequTask = [sharedSess dataTaskWithRequest:getRequ //get型请求
+                                                      completionHandler:onCompleted]; //下载完成处理器
+    //恢复任务
+    [getRequTask resume];
+}
 @end
