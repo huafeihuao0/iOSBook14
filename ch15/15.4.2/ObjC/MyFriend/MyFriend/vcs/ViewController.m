@@ -1,16 +1,3 @@
-//
-//  ViewController.m
-//  MyFriend
-//
-//  Created by 关东升 on 16/1/7.
-//  本书网站：http://www.51work6.com
-//  智捷课堂在线课堂：http://www.zhijieketang.com/
-//  智捷课堂微信公共号：zhijieketang
-//  作者微博：@tony_关东升
-//  作者微信：tony关东升
-//  QQ：569418560 邮箱：eorient@sina.com
-//  QQ交流群：162030268
-//
 
 #import "ViewController.h"
 #import <ContactsUI/ContactsUI.h>
@@ -33,15 +20,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)selectContacts:(id)sender {
-    
-    CNContactPickerViewController *contactPicker = [[CNContactPickerViewController alloc] init];
-    contactPicker.delegate = self;
-    contactPicker.displayedPropertyKeys = @[CNContactPhoneNumbersKey];
-    
-    [self presentViewController:contactPicker animated:TRUE completion:nil];
-    
-}
+
 
 #pragma mark --实现表视图数据源协议
 
@@ -64,6 +43,8 @@
 }
 
 #pragma mark --表视图委托协议
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     CNContactStore* contactStore = [[CNContactStore alloc] init];
@@ -75,35 +56,70 @@
     CNContact *contact = [contactStore unifiedContactWithIdentifier:selectedContact.identifier keysToFetch:keysToFetch error:&error];
 
     if (!error) {
-        CNContactViewController* controller = [CNContactViewController viewControllerForContact:contact];
-        controller.delegate = self;
-        controller.contactStore = contactStore;
-        controller.allowsEditing = TRUE;
-        controller.allowsActions = TRUE;
-
-        controller.displayedPropertyKeys = @[CNContactPhoneNumbersKey, CNContactEmailAddressesKey];
-
-        [self.navigationController pushViewController:controller animated:TRUE];
+        
+        [self pushToContactVC:contact contactStore:contactStore];
     } else {
         NSLog(@"error : %@", error.localizedDescription);
     }
 
 }
 
-#pragma  --实现CNContactPickerDelegate委托协议
 
-- (void)contactPicker:(CNContactPickerViewController *)picker didSelectContact:(CNContact *)contact {
+#pragma mark --  【联系人选择控制器】
+/***
+ * 使用系统默认联系人选择控制器选择联系人
+ ****/
+- (IBAction)selectContacts:(id)sender
+{
+    //联系人选择控制器
+    CNContactPickerViewController *contactPicker = [[CNContactPickerViewController alloc] init];
+    contactPicker.delegate = self;
+    contactPicker.displayedPropertyKeys = @[CNContactPhoneNumbersKey];
     
-    if (![self.listContacts containsObject:contact]) {
+    [self presentViewController:contactPicker animated:TRUE completion:nil];
+    
+}
+
+#pragma  --实现CNContactPickerDelegate委托协议
+/***
+ * 选中了一个联系人
+ ****/
+- (void)contactPicker:(CNContactPickerViewController *)picker
+     didSelectContact:(CNContact *)contact
+{
+    
+    if (![self.listContacts containsObject:contact])
+    {
         [self.listContacts addObject:contact];
         [self.tableView reloadData];
     }
 }
 
+#pragma mark --  【联系人控制器】
+/***
+ * 推入联系人选择控制器
+ ****/
+- (void)pushToContactVC:(CNContact *)contact
+           contactStore:(CNContactStore *)contactStore
+{
+    CNContactViewController* contactVC = [CNContactViewController viewControllerForContact:contact];//指定要操作的联系人
+    contactVC.delegate = self;
+    contactVC.contactStore = contactStore;
+    contactVC.allowsEditing = TRUE;//允许编辑
+    contactVC.allowsActions = TRUE;//允许操作
+    
+    contactVC.displayedPropertyKeys = @[CNContactPhoneNumbersKey,
+                                        CNContactEmailAddressesKey];//要展示的联系人属性
+    
+    [self.navigationController pushViewController:contactVC animated:TRUE];
+}
 #pragma  --实现CNContactViewControllerDelegate委托协议
-
+/***
+ * 联系人控制器是否执行默认的动作
+ ****/
 - (BOOL)contactViewController:(CNContactViewController *)viewController
-        shouldPerformDefaultActionForContactProperty:(CNContactProperty *)property {
+        shouldPerformDefaultActionForContactProperty:(CNContactProperty *)property
+{
     return TRUE;
 }
 
