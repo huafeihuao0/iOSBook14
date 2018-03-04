@@ -1,16 +1,3 @@
-//
-//  ViewController.m
-//  MyFriend
-//
-//  Created by 关东升 on 16/1/7.
-//  本书网站：http://www.51work6.com
-//  智捷课堂在线课堂：http://www.zhijieketang.com/
-//  智捷课堂微信公共号：zhijieketang
-//  作者微博：@tony_关东升
-//  作者微信：tony关东升
-//  QQ：569418560 邮箱：eorient@sina.com
-//  QQ交流群：162030268
-//
 
 #import "ViewController.h"
 #import <ContactsUI/ContactsUI.h>
@@ -35,15 +22,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)selectContacts:(id)sender {
 
-    CNContactPickerViewController *contactPicker = [[CNContactPickerViewController alloc] init];
-    contactPicker.delegate = self;
-    contactPicker.displayedPropertyKeys = @[CNContactPhoneNumbersKey];
-
-    [self presentViewController:contactPicker animated:TRUE completion:nil];
-
-}
 
 #pragma mark - 实现表视图数据源协议
 
@@ -66,12 +45,30 @@
 }
 
 
+#pragma mark --  【系统联系人表格控制器】
+/***
+ * 调用系统联系人表格控制器选择联系人
+ ****/
+- (IBAction)selectContacts:(id)sender //
+{
+    //实例化联系人选择控制器
+    CNContactPickerViewController *contactPicker = [[CNContactPickerViewController alloc] init];
+    contactPicker.delegate = self;
+    contactPicker.displayedPropertyKeys = @[CNContactPhoneNumbersKey]; //要显示的联系人属性键
+    
+    [self presentViewController:contactPicker animated:TRUE completion:nil];
+}
+
 #pragma  --实现CNContactPickerDelegate委托协议
-
-- (void)contactPicker:(CNContactPickerViewController *)picker didSelectContact:(CNContact *)contact {
-
-    if (![self.listContacts containsObject:contact]) {
-        [self.listContacts addObject:contact];
+/***
+ * 选中单个联系人监听器
+ ****/
+- (void)contactPicker:(CNContactPickerViewController *)picker
+     didSelectContact:(CNContact *)selectedContact
+{
+    if (![self.listContacts containsObject:selectedContact])
+    {
+        [self.listContacts addObject:selectedContact];
         [self.tableView reloadData];
     }
 
