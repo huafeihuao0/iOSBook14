@@ -1,24 +1,13 @@
-//
-//  DetailViewController.m
-//  Write_Contacts
-//
-//  Created by 关东升 on 16/1/6.
-//  本书网站：http://www.51work6.com
-//  智捷课堂在线课堂：http://www.zhijieketang.com/
-//  智捷课堂微信公共号：zhijieketang
-//  作者微博：@tony_关东升
-//  作者微信：tony关东升
-//  QQ：569418560 邮箱：eorient@sina.com
-//  QQ交流群：162030268
-//
+#import "ContactDetailVC.h"
 
-#import "DetailViewController.h"
-
-@interface DetailViewController ()
+/***
+ * 联系人详情和修改控制器
+ ****/
+@interface ContactDetailVC ()
 
 @end
 
-@implementation DetailViewController
+@implementation ContactDetailVC
 
 
 - (void)viewDidLoad
@@ -81,64 +70,93 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (IBAction)saveClick:(id)sender {
-    
-    CNMutableContact* contact = [self.selectContact mutableCopy];
+/***
+ * 保存联系人被点击
+ ****/
+- (IBAction)saveClick:(id)sender
+{
+    //复制要习惯的联系人
+    CNMutableContact* contactToChange = [self.selectContact mutableCopy];
     
     // 设置电话号码
-    CNPhoneNumber* mobilePhoneValue = [[CNPhoneNumber alloc] initWithStringValue:self.txtMobile.text];
-    CNLabeledValue* mobilePhone = [[CNLabeledValue alloc] initWithLabel:CNLabelPhoneNumberMobile value:mobilePhoneValue];
-    
-    CNPhoneNumber* iPhoneValue = [[CNPhoneNumber alloc] initWithStringValue:self.txtIPhone.text];
-    CNLabeledValue* iPhone = [[CNLabeledValue alloc] initWithLabel:CNLabelPhoneNumberiPhone value:iPhoneValue];
-    
-    // 添加电话号码到数据库
-    contact.phoneNumbers = @[mobilePhone, iPhone];
+    [self savePhone:contactToChange];
     
     //设置Email属性
-    CNLabeledValue* homeEmail = [[CNLabeledValue alloc] initWithLabel:CNLabelHome value:self.txtHomeEmail.text];
-    CNLabeledValue* workEmail = [[CNLabeledValue alloc] initWithLabel:CNLabelWork value:self.txtWorkEmail.text];
-    // 添加Email到数据库
-    contact.emailAddresses = @[homeEmail, workEmail];
+    [self saveEmails:contactToChange];
     
     //最后保存
-    CNSaveRequest* request = [[CNSaveRequest alloc] init];
-    [request updateContact:contact];
+    CNSaveRequest* request = [[CNSaveRequest alloc] init];//实例化保存请求对象
+    [request updateContact:contactToChange];//更新联系人
     
     CNContactStore *contactStore = [[CNContactStore alloc] init];
     NSError* error;
-    [contactStore executeSaveRequest:request error:&error];
-    
-    if (!error) {
+    [contactStore executeSaveRequest:request error:&error];//联系人仓库执行保存联系人请求
+    if (!error)
+    {
         //导航回根视图控制器ViewController
         [self.navigationController popToRootViewControllerAnimated:TRUE];
-    } else {
+    } else
+    {
         NSLog(@"error : %@", error.localizedDescription);
     }
 }
 
-- (IBAction)deleteClick:(id)sender {
-    
+/***
+ * 删除联系人被点击
+ ****/
+- (IBAction)deleteClick:(id)sender
+{
+    //复制要删除的联系人
     CNMutableContact* contact = [self.selectContact mutableCopy];
 
+    //实例化保存请求对象
     CNSaveRequest* request = [[CNSaveRequest alloc] init];
-    [request deleteContact:contact];
+    [request deleteContact:contact];  //删除联系人
     
     CNContactStore *contactStore = [[CNContactStore alloc] init];
     NSError* error;
     [contactStore executeSaveRequest:request error:&error];
     
-    if (!error) {
+    if (!error)
+    {
         //导航回根视图控制器ViewController
         [self.navigationController popToRootViewControllerAnimated:TRUE];
-    } else {
+    } else
+    {
         NSLog(@"error : %@", error.localizedDescription);
     }
     
+}
+
+#pragma mark --  【工具】
+/***
+ * 保存手机号
+ ****/
+- (void)savePhone:(CNMutableContact *)contactToChange
+{
+    CNPhoneNumber* mobilePhoneValue = [[CNPhoneNumber alloc] initWithStringValue:self.txtMobile.text];
+    CNLabeledValue* mobilePhone = [[CNLabeledValue alloc] initWithLabel:CNLabelPhoneNumberMobile  //移动电话
+                                                                  value:mobilePhoneValue];
+    
+    CNPhoneNumber* iPhoneValue = [[CNPhoneNumber alloc] initWithStringValue:self.txtIPhone.text];
+    CNLabeledValue* iPhone = [[CNLabeledValue alloc] initWithLabel:CNLabelPhoneNumberiPhone //iphone电话
+                                                             value:iPhoneValue];
+    
+    // 添加电话号码到数据库
+    contactToChange.phoneNumbers = @[mobilePhone, iPhone];
+}
+
+/***
+ * 保存邮箱
+ ****/
+- (void)saveEmails:(CNMutableContact *)contactToChange
+{
+    CNLabeledValue* homeEmail = [[CNLabeledValue alloc] initWithLabel:CNLabelHome
+                                                                value:self.txtHomeEmail.text];
+    CNLabeledValue* workEmail = [[CNLabeledValue alloc] initWithLabel:CNLabelWork
+                                                                value:self.txtWorkEmail.text];
+    // 添加Email到数据库
+    contactToChange.emailAddresses = @[homeEmail, workEmail];
 }
 
 @end
