@@ -1,17 +1,3 @@
-//
-//  MasterViewController.m
-//  MyNotes
-//
-//  Created by 关东升 on 15/12/31.
-//  本书网站：http://www.51work6.com
-//  智捷课堂在线课堂：http://www.zhijieketang.com/
-//  智捷课堂微信公共号：zhijieketang
-//  作者微博：@tony_关东升
-//  作者微信：tony关东升
-//  QQ：569418560 邮箱：eorient@sina.com
-//  QQ交流群：162030268
-//
-
 #import "MasterViewController.h"
 #import "DetailViewController.h"
 #import "NSNumber+Message.h"
@@ -53,10 +39,7 @@ enum ActionTypes {
     [self startRequest];
     
     //初始化UIRefreshControl
-    UIRefreshControl *rc = [[UIRefreshControl alloc] init];
-    rc.attributedTitle = [[NSAttributedString alloc]initWithString:@"下拉刷新"];
-    [rc addTarget:self action:@selector(refreshTableView) forControlEvents:UIControlEventValueChanged];
-    self.refreshControl = rc;
+    [self setupRefreshControl];
     
 }
 
@@ -79,6 +62,22 @@ enum ActionTypes {
 //    action = QUERY;
 //    [self startRequest];
 //}
+
+#pragma mark --  【刷新控制器】
+/***
+ * 构建下拉刷新控件
+ ****/
+- (void)setupRefreshControl
+{
+    UIRefreshControl *refreshCtrl = [[UIRefreshControl alloc] init];
+    //设置标题
+    refreshCtrl.attributedTitle = [[NSAttributedString alloc] initWithString:@"下拉刷新"];
+    //设置值改变事件
+    [refreshCtrl addTarget:self
+                    action:@selector(refreshTableView)
+          forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refreshCtrl;
+}
 
 
 #pragma mark - 开始请求Web Service
@@ -193,8 +192,9 @@ enum ActionTypes {
 #pragma mark - 重新加载表视图
 
 - (void)reloadView:(NSDictionary *)res {
-    
+    //结束刷新
     [self.refreshControl endRefreshing];
+    
     self.refreshControl.attributedTitle = [[NSAttributedString alloc]initWithString:@"下拉刷新"];
     
     NSNumber *resultCode = res[@"ResultCode"];
