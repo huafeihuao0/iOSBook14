@@ -25,7 +25,7 @@
 		EA41C6541C35193D00C93B3E /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		EA41C6551C35193D00C93B3E /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		EA41C6571C35193D00C93B3E /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
-		EA41C6581C35193D00C93B3E /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = DetailViewController.m; path = MyNotes/DetailViewController.m; sourceTree = "<group>"; };
+		EA41C6581C35193D00C93B3E /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		EA41C65B1C35193D00C93B3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EA41C65D1C35193D00C93B3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EA41C6601C35193D00C93B3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -45,11 +45,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4CBB63B2204EB485008B9E6D /* vcs */ = {
+			isa = PBXGroup;
+			children = (
+				EA41C6541C35193D00C93B3E /* MasterViewController.h */,
+				EA41C6551C35193D00C93B3E /* MasterViewController.m */,
+				EA41C6571C35193D00C93B3E /* DetailViewController.h */,
+				EA41C6581C35193D00C93B3E /* DetailViewController.m */,
+			);
+			path = vcs;
+			sourceTree = "<group>";
+		};
+		4CBB63B3204EB4A2008B9E6D /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				EAB9C29F1C42BEF800845FA3 /* NSNumber+Message.h */,
+				EAB9C2A01C42BEF800845FA3 /* NSNumber+Message.m */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
 		EA41C6421C35193D00C93B3E = {
 			isa = PBXGroup;
 			children = (
 				EA41C64D1C35193D00C93B3E /* PresentationLayer */,
-				EA41C6581C35193D00C93B3E /* DetailViewController.m */,
 				EA41C64C1C35193D00C93B3E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,13 +84,10 @@
 		EA41C64D1C35193D00C93B3E /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				4CBB63B3204EB4A2008B9E6D /* utils */,
+				4CBB63B2204EB485008B9E6D /* vcs */,
 				EA41C6511C35193D00C93B3E /* AppDelegate.h */,
 				EA41C6521C35193D00C93B3E /* AppDelegate.m */,
-				EA41C6541C35193D00C93B3E /* MasterViewController.h */,
-				EA41C6551C35193D00C93B3E /* MasterViewController.m */,
-				EA41C6571C35193D00C93B3E /* DetailViewController.h */,
-				EAB9C29F1C42BEF800845FA3 /* NSNumber+Message.h */,
-				EAB9C2A01C42BEF800845FA3 /* NSNumber+Message.m */,
 				EA41C65A1C35193D00C93B3E /* Main.storyboard */,
 				EA41C65D1C35193D00C93B3E /* Assets.xcassets */,
 				EA41C65F1C35193D00C93B3E /* LaunchScreen.storyboard */,
