@@ -1,17 +1,3 @@
-//
-//  ViewController.m
-//  UploadSample
-//
-//  Created by 关东升 on 16/1/11.
-//  本书网站：http://www.51work6.com
-//  智捷课堂在线课堂：http://www.zhijieketang.com/
-//  智捷课堂微信公共号：zhijieketang
-//  作者微博：@tony_关东升
-//  作者微信：tony关东升
-//  QQ：569418560 邮箱：eorient@sina.com
-//  QQ交流群：162030268
-//
-
 #import "ViewController.h"
 #import "AFNetworking.h"
 
@@ -33,43 +19,11 @@
     [super didReceiveMemoryWarning];
 }
 
-- (IBAction)onClick:(id)sender {
-    
-    NSString *uploadStrURL = @"http://www.51work6.com/service/upload.php";
-    NSDictionary *params = @{@"email" : @"<你的51work6.com用户邮箱>"};
-    
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"test2" ofType:@"jpg"];
-    
-    
-    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST"
-                  URLString:uploadStrURL parameters:params
-                  constructingBodyWithBlock:^(id <AFMultipartFormData> formData) {
-                      [formData appendPartWithFileURL:[NSURL fileURLWithPath:filePath] name:@"file" fileName:@"1.jpg" mimeType:@"image/jpeg" error:nil];
-                  } error:nil];
-    
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSURLSessionUploadTask *uploadTask;
-    uploadTask = [manager uploadTaskWithStreamedRequest:request
-                   progress:^(NSProgress *uploadProgress) {
-                       NSLog(@"上传: %@", [uploadProgress localizedDescription]);
-                       dispatch_async(dispatch_get_main_queue(), ^{
-                           [self.progressView setProgress:uploadProgress.fractionCompleted];
-                       });
 
-                   }
-                  completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-                      if (!error) {
-                          NSLog(@"上传成功");
-                          [self download];
-                      } else {
-                          NSLog(@"上传失败: %@", error.localizedDescription);
-                      }
-                  }];
-    
-    [uploadTask resume];
-    
-    self.label.text = @"上传进度";
-    self.progressView.progress = 0.0;
+
+- (IBAction)onClick:(id)sender {
+    //使用AFN上传图片
+    [self afnUp];
 }
 
 - (void)download {
@@ -114,4 +68,78 @@
 
 }
 
+#pragma mark --  【上传】
+/***
+ * 使用AFN上传图片
+ ****/
+- (void)afnUp
+{
+    //构建上传请求
+    NSMutableURLRequest * upRequ = [self makeUpRequ];
+    
+    //默认的AFN的会话管理器
+    NSURLSessionConfiguration *defSessConfig=[NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *defAFNManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:defSessConfig];
+    
+    //进度回调
+    id onProgressed=^(NSProgress *uploadProgress)
+    {
+        NSLog(@"上传: %@", [uploadProgress localizedDescription]);
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+            [self.progressView setProgress:uploadProgress.fractionCompleted];
+        });
+        
+    };
+    //完成回调
+    id onFinished=^(NSURLResponse *response, id responseObject, NSError *error)
+    {
+        if (!error)
+        {
+            NSLog(@"上传成功");
+            [self download];
+        } else
+        {
+            NSLog(@"上传失败: %@", error.localizedDescription);
+        }
+    };
+    
+    NSURLSessionUploadTask *uploadTask= [defAFNManager uploadTaskWithStreamedRequest:upRequ //使用流式请求构建上传任务
+                                                                            progress:onProgressed //进度回调
+                                                                   completionHandler:onFinished]; //完成回调
+    //恢复上传任务
+    [uploadTask resume];
+    
+    self.label.text = @"上传进度";
+    self.progressView.progress = 0.0;
+}
+
+/***
+ * 构建上传请求
+ ****/
+- (NSMutableURLRequest *)makeUpRequ
+{
+    NSString *uploadStrURL = @"http://www.51work6.com/service/upload.php";
+    //普通键值参数
+    NSDictionary *kvParams = @{@"email" : @"<你的51work6.com用户邮箱>"};
+    //要上传的文件路径
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"test2"
+                                                         ofType:@"jpg"];
+    //构建多部分请求表单数据的block
+    id buildBodyBlock=^(id <AFMultipartFormData> multiPartsData)
+    {
+        [multiPartsData appendPartWithFileURL:[NSURL fileURLWithPath:filePath]
+                                         name:@"file" //key
+                                     fileName:@"1.jpg" //建议的文件名
+                                     mimeType:@"image/jpeg" //文件类型
+                                        error:nil];
+    };
+    //请求序列化器构建多部分数据请求体
+    NSMutableURLRequest *upRequ = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST"
+                                                                                              URLString:uploadStrURL
+                                                                                            parameters:kvParams
+                                                                              constructingBodyWithBlock:buildBodyBlock
+                                                                                                  error:nil];
+    return upRequ;
+}
 @end
