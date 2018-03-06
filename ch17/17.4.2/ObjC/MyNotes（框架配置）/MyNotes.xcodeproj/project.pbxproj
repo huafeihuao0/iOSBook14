@@ -79,6 +79,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4CA99640204EBE6F00AC9F5B /* vcs */ = {
+			isa = PBXGroup;
+			children = (
+				EA41C6541C35193D00C93B3E /* MasterViewController.h */,
+				EA41C6551C35193D00C93B3E /* MasterViewController.m */,
+				EA41C6571C35193D00C93B3E /* DetailViewController.h */,
+				EA41C6581C35193D00C93B3E /* DetailViewController.m */,
+			);
+			path = vcs;
+			sourceTree = "<group>";
+		};
 		EA41C6421C35193D00C93B3E = {
 			isa = PBXGroup;
 			children = (
@@ -99,12 +110,9 @@
 		EA41C64D1C35193D00C93B3E /* PresentationLayer */ = {
 			isa = PBXGroup;
 			children = (
+				4CA99640204EBE6F00AC9F5B /* vcs */,
 				EA41C6511C35193D00C93B3E /* AppDelegate.h */,
 				EA41C6521C35193D00C93B3E /* AppDelegate.m */,
-				EA41C6541C35193D00C93B3E /* MasterViewController.h */,
-				EA41C6551C35193D00C93B3E /* MasterViewController.m */,
-				EA41C6571C35193D00C93B3E /* DetailViewController.h */,
-				EA41C6581C35193D00C93B3E /* DetailViewController.m */,
 				EAB9C29F1C42BEF800845FA3 /* NSNumber+Message.h */,
 				EAB9C2A01C42BEF800845FA3 /* NSNumber+Message.m */,
 				EA41C65A1C35193D00C93B3E /* Main.storyboard */,
