@@ -1,19 +1,8 @@
-//
-//  MasterViewController.m
-//  MyNotes
-//
-//  Created by 关东升 on 15/12/31.
-//  本书网站：http://www.51work6.com
-//  智捷课堂在线课堂：http://www.zhijieketang.com/
-//  智捷课堂微信公共号：zhijieketang
-//  作者微博：@tony_关东升
-//  作者微信：tony关东升
-//  QQ：569418560 邮箱：eorient@sina.com
-//  QQ交流群：162030268
-//
 
 #import "MasterViewController.h"
 #import "DetailViewController.h"
+
+
 
 @implementation MasterViewController
 
@@ -22,43 +11,61 @@
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     self.detailViewController = (DetailViewController *) [[self.splitViewController.viewControllers lastObject] topViewController];
 
-    [self startRequest];
+    //使用默认会话get型请求
+    [self getRequByDefSess];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - 开始请求Web Service
-
-- (void)startRequest {
-
-    NSString *strURL = [[NSString alloc] initWithFormat:@"http://www.51work6.com/service/mynotes/WebService.php?email=%@&type=%@&action=%@", @"<你的51work6.com用户邮箱>", @"JSON", @"query"];
-
-    strURL = [strURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-
-    NSURL *url = [NSURL URLWithString:strURL];
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-
-    NSURLSessionConfiguration *defaultConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration: defaultConfig delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
-
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:
-        ^(NSData *data, NSURLResponse *response, NSError *error) {
+#pragma mark -【DAO】
+/***
+ * 使用默认会话get型请求
+ ****/
+- (void)getRequByDefSess
+{
+    //构建get型请求对象
+    NSURLRequest * getRequ = [self makeupGetRequ];
+    //实例化默认会话配置
+    NSURLSessionConfiguration *defaultSessConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+    //使用默认会话配置实例化默认会话
+    NSURLSession *session = [NSURLSession sessionWithConfiguration: defaultSessConfig
+                                                          delegate: nil
+                                                     delegateQueue: [NSOperationQueue mainQueue]];//在主队列中运行
+    //下载完成处理器
+    id onCompleted=^(NSData *data, NSURLResponse *response, NSError *error)
+    {
         NSLog(@"请求完成...");
-        if (!error) {
-            NSDictionary *resDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            //dispatch_async(dispatch_get_main_queue(), ^{
+        if (!error)
+        {
+            //反序列化
+            NSDictionary *resDict = [NSJSONSerialization JSONObjectWithData:data
+                                                                    options:NSJSONReadingAllowFragments //可读片段
+                                                                      error:nil];
+            //刷新表格
             [self reloadView:resDict];
-            //});
-        } else {
+        } else
+        {
             NSLog(@"error : %@", error.localizedDescription);
         }
-    }];
+    };
+    //创建数据下载任务
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:getRequ
+                                            completionHandler:onCompleted];
 
-    [task resume];
+    [dataTask resume];
 
+}
+
+/***
+ * 构建get型请求对象
+ ****/
+- (NSURLRequest *)makeupGetRequ
+{
+    NSString *getUrlMainStr=@"http://www.51work6.com/service/mynotes/WebService.php?email=%@&type=%@&action=%@";
+    NSString *requUrlStr = [[NSString alloc] initWithFormat:getUrlMainStr, @"<你的51work6.com用户邮箱>", @"JSON", @"query"];
+    requUrlStr = [requUrlStr stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
+    NSURL *requUrl = [NSURL URLWithString:requUrlStr];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:requUrl];
+    return request;
 }
 
 #pragma mark - Segues
