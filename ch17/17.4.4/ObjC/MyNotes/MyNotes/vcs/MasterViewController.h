@@ -25,6 +25,6 @@
 @property(nonatomic, strong) NSMutableArray *listData;
 
 //开始请求Web Service
-- (void)startRequest;
+- (void)afnPostData;
 
 @end

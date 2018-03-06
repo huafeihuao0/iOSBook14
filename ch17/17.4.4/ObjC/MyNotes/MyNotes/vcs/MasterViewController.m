@@ -1,17 +1,3 @@
-//
-//  MasterViewController.m
-//  MyNotes
-//
-//  Created by 关东升 on 15/12/31.
-//  本书网站：http://www.51work6.com
-//  智捷课堂在线课堂：http://www.zhijieketang.com/
-//  智捷课堂微信公共号：zhijieketang
-//  作者微博：@tony_关东升
-//  作者微信：tony关东升
-//  QQ：569418560 邮箱：eorient@sina.com
-//  QQ交流群：162030268
-//
-
 #import "MasterViewController.h"
 #import "DetailViewController.h"
 
@@ -25,43 +11,12 @@
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     self.detailViewController = (DetailViewController *) [[self.splitViewController.viewControllers lastObject] topViewController];
 
-    [self startRequest];
+    [self afnPostData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - 开始请求Web Service
-
-- (void)startRequest {
-
-    NSString *strURL = @"http://www.51work6.com/service/mynotes/WebService.php";
-    NSURL *url = [NSURL URLWithString:strURL];
-    
-    //设置参数
-    NSString *post = [NSString stringWithFormat:@"email=%@&type=%@&action=%@", @"<你的51work6.com用户邮箱>", @"JSON", @"query"];
-    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:postData];
-
-    NSURLSessionConfiguration *defaultConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:defaultConfig];
-
-    NSURLSessionDataTask *task = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        NSLog(@"请求完成...");
-        if (!error) {
-            [self reloadView:responseObject];
-        } else {
-            NSLog(@"error : %@", error.localizedDescription);
-        }
-    }];
-
-    [task resume];
-
 }
 
 #pragma mark - Segues
@@ -113,5 +68,51 @@
     }
 }
 
+
+#pragma mark -【DAO】
+- (void)afnPostData
+{
+    //构建post请求对象
+    NSMutableURLRequest * postRequ = [self makePostRequ];
+    
+    //使用默认会话配置实例化AFN会话管理器
+    NSURLSessionConfiguration *defSessConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:defSessConfig];
+    
+    //post请求完成后回调
+    id onPostFinished=^(NSURLResponse *response, id responseObject, NSError *error)
+    {
+        NSLog(@"请求完成...");
+        if (!error) {
+            [self reloadView:responseObject];
+        } else {
+            NSLog(@"error : %@", error.localizedDescription);
+        }
+    };
+    
+    NSURLSessionDataTask *task = [manager dataTaskWithRequest:postRequ
+                                            completionHandler:onPostFinished];
+    
+    [task resume];
+}
+
+/***
+ * 构建post请求对象
+ ****/
+- (NSMutableURLRequest *)makePostRequ
+{
+    NSString *strURL = @"http://www.51work6.com/service/mynotes/WebService.php";
+    NSURL *url = [NSURL URLWithString:strURL];
+    
+    //创建post请求参数体
+    NSString *post = [NSString stringWithFormat:@"email=%@&type=%@&action=%@",
+                      @"<你的51work6.com用户邮箱>", @"JSON", @"query"];
+    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding];
+    //创建可变请求对象
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:postData]; //设置请求体
+    return request;
+}
 
 @end
