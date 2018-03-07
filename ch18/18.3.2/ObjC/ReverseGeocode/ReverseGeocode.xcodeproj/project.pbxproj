@@ -41,6 +41,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C427A8C2050114800272FCE /* vcs */ = {
+			isa = PBXGroup;
+			children = (
+				EA57316D1C4883DF008060E2 /* ViewController.h */,
+				EA57316E1C4883DF008060E2 /* ViewController.m */,
+			);
+			path = vcs;
+			sourceTree = "<group>";
+		};
 		EA57315B1C4883DF008060E2 = {
 			isa = PBXGroup;
 			children = (
@@ -61,10 +70,9 @@
 		EA5731661C4883DF008060E2 /* ReverseGeocode */ = {
 			isa = PBXGroup;
 			children = (
+				4C427A8C2050114800272FCE /* vcs */,
 				EA57316A1C4883DF008060E2 /* AppDelegate.h */,
 				EA57316B1C4883DF008060E2 /* AppDelegate.m */,
-				EA57316D1C4883DF008060E2 /* ViewController.h */,
-				EA57316E1C4883DF008060E2 /* ViewController.m */,
 				EA5731701C4883DF008060E2 /* Main.storyboard */,
 				EA5731731C4883DF008060E2 /* Assets.xcassets */,
 				EA5731751C4883DF008060E2 /* LaunchScreen.storyboard */,

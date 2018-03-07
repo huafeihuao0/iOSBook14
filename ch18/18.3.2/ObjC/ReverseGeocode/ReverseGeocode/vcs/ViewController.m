@@ -1,17 +1,3 @@
-//
-//  ViewController.m
-//  ReverseGeocode
-//
-//  Created by 关东升 on 16/1/15.
-//  本书网站：http://www.51work6.com
-//  智捷课堂在线课堂：http://www.zhijieketang.com/
-//  智捷课堂微信公共号：zhijieketang
-//  作者微博：@tony_关东升
-//  作者微信：tony关东升
-//  QQ：569418560 邮箱：eorient@sina.com
-//  QQ交流群：162030268
-//
-
 #import "ViewController.h"
 #import <CoreLocation/CoreLocation.h>
 
@@ -65,23 +51,31 @@
     [self.locationManager stopUpdatingLocation];
 }
 
-- (IBAction)reverseGeocode:(id)sender {
-
+/***
+ * 反编码
+ ****/
+- (IBAction)reverseGeocode:(id)sender
+{
+    //实例化地理位置编码/解码器
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
 
+    //反编码完成回调
+    id onFinished=^(NSArray<CLPlacemark *> *placemarks, NSError *error)
+    {
+        if (error)
+        {
+            NSLog(@"Error is %@",error.localizedDescription);
+        } else if ([placemarks count] > 0) //查找到地标
+        {
+            CLPlacemark *placemark = placemarks[0];
+            NSString *name = placemark.name;//地标名
+            
+            self.txtView.text = name;
+        }
+    };
+    //反编码地理位置
     [geocoder reverseGeocodeLocation:self.currLocation
-       completionHandler:^(NSArray<CLPlacemark *> *placemarks, NSError *error) {
-           
-           if (error) {
-               NSLog(@"Error is %@",error.localizedDescription);
-           } else if ([placemarks count] > 0) {
-
-               CLPlacemark *placemark = placemarks[0];
-               NSString *name = placemark.name;
-               self.txtView.text = name;
-
-           }
-       }];
+                   completionHandler:onFinished];
 }
 
 #pragma mark -- Core Location委托方法用于实现位置的更新
