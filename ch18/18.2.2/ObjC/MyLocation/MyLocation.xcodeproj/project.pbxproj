@@ -44,6 +44,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4CD851DD20500DBA0057ABF9 /* vcs */ = {
+			isa = PBXGroup;
+			children = (
+				EAF164A51C47713800B1E1F8 /* ViewController.h */,
+				EAF164A61C47713800B1E1F8 /* ViewController.m */,
+				EAF164BC1C479E5300B1E1F8 /* RegViewController.h */,
+				EAF164BD1C479E5300B1E1F8 /* RegViewController.m */,
+			);
+			path = vcs;
+			sourceTree = "<group>";
+		};
 		EAF164931C47713700B1E1F8 = {
 			isa = PBXGroup;
 			children = (
@@ -64,12 +75,9 @@
 		EAF1649E1C47713800B1E1F8 /* MyLocation */ = {
 			isa = PBXGroup;
 			children = (
+				4CD851DD20500DBA0057ABF9 /* vcs */,
 				EAF164A21C47713800B1E1F8 /* AppDelegate.h */,
 				EAF164A31C47713800B1E1F8 /* AppDelegate.m */,
-				EAF164A51C47713800B1E1F8 /* ViewController.h */,
-				EAF164A61C47713800B1E1F8 /* ViewController.m */,
-				EAF164BC1C479E5300B1E1F8 /* RegViewController.h */,
-				EAF164BD1C479E5300B1E1F8 /* RegViewController.m */,
 				EAF164A81C47713800B1E1F8 /* Main.storyboard */,
 				EAF164AB1C47713800B1E1F8 /* Assets.xcassets */,
 				EAF164AD1C47713800B1E1F8 /* LaunchScreen.storyboard */,

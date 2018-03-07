@@ -45,14 +45,21 @@
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
+/***
+ * 应用激活时候启动定位
+ ****/
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
     //开始定位
     [self.locationManager startUpdatingLocation];
     NSLog(@"开始定位");
 }
 
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
+/***
+ * 应用进入后台时候停止定位
+ ****/
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
     //停止定位
     [self.locationManager stopUpdatingLocation];
     NSLog(@"停止定位");
