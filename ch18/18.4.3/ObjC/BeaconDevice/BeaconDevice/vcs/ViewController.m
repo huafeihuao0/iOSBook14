@@ -1,17 +1,3 @@
-//
-//  ViewController.m
-//  BeaconDevice
-//
-//  Created by 关东升 on 16/1/16.
-//  本书网站：http://www.51work6.com
-//  智捷课堂在线课堂：http://www.zhijieketang.com/
-//  智捷课堂微信公共号：zhijieketang
-//  作者微博：@tony_关东升
-//  作者微信：tony关东升
-//  QQ：569418560 邮箱：eorient@sina.com
-//  QQ交流群：162030268
-//
-
 #import "ViewController.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <CoreLocation/CoreLocation.h>
@@ -20,16 +6,17 @@
 #define kID     @"com.51work6.AirLocate"
 #define kPower  @-59   //采用字面量表示NSNumber对象
 
-@interface ViewController () <CBPeripheralManagerDelegate>
+@interface ViewController () <CBPeripheralManagerDelegate>//beacon外设管理器代理
 
-@property(nonatomic, strong) CBPeripheralManager* peripheralManager;
+@property(nonatomic, strong) CBPeripheralManager* peripheralManager; //beacon外设管理器
 
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];    
+    [super viewDidLoad];
+    //初始化微定位外设管理器
     self.peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
 }
 
@@ -38,22 +25,32 @@
 }
 
 #pragma --实现CBPeripheralManagerDelegate协议
-- (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral {
+/***
+ * 微服务外设状态发生变化
+ ****/
+- (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral
+{
     NSLog(@"外设状态变化");
 }
 
-- (IBAction)valueChanged:(id)sender {
+- (IBAction)valueChanged:(id)sender
+{
     UISwitch* swc =  (UISwitch*)sender;
     
-    if (swc.on) {
+    if (swc.on)
+    {
+        //实例化uuid
         NSUUID* uuid = [[NSUUID alloc] initWithUUIDString: kUUID];
-        CLBeaconRegion* region = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:kID];
-        
+        //实例化微服务围栏
+        CLBeaconRegion* region = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
+                                                                    identifier:kID];
+        //围栏内广播数据
         NSDictionary* peripheralData = [region peripheralDataWithMeasuredPower:kPower];
 
         [self.peripheralManager startAdvertising:peripheralData];
         
-    } else {
+    } else
+    {
         [self.peripheralManager stopAdvertising];
     }
 }

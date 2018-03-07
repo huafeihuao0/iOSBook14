@@ -39,6 +39,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C0AC8912050142800838205 /* vcs */ = {
+			isa = PBXGroup;
+			children = (
+				EA64959D1C496400001A7D7E /* ViewController.h */,
+				EA64959E1C496400001A7D7E /* ViewController.m */,
+			);
+			path = vcs;
+			sourceTree = "<group>";
+		};
 		EA64958B1C496400001A7D7E = {
 			isa = PBXGroup;
 			children = (
@@ -58,10 +67,9 @@
 		EA6495961C496400001A7D7E /* BeaconDevice */ = {
 			isa = PBXGroup;
 			children = (
+				4C0AC8912050142800838205 /* vcs */,
 				EA64959A1C496400001A7D7E /* AppDelegate.h */,
 				EA64959B1C496400001A7D7E /* AppDelegate.m */,
-				EA64959D1C496400001A7D7E /* ViewController.h */,
-				EA64959E1C496400001A7D7E /* ViewController.m */,
 				EA6495A01C496400001A7D7E /* Main.storyboard */,
 				EA6495A31C496400001A7D7E /* Assets.xcassets */,
 				EA6495A51C496400001A7D7E /* LaunchScreen.storyboard */,
