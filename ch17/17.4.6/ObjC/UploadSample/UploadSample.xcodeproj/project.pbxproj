@@ -91,6 +91,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4CC2567B204EC7BB00482672 /* vcs */ = {
+			isa = PBXGroup;
+			children = (
+				EA09FA981C43B1FC00328EBB /* ViewController.h */,
+				EA09FA991C43B1FC00328EBB /* ViewController.m */,
+			);
+			name = vcs;
+			sourceTree = "<group>";
+		};
 		EA09FA861C43B1FC00328EBB = {
 			isa = PBXGroup;
 			children = (
@@ -111,12 +120,11 @@
 		EA09FA911C43B1FC00328EBB /* UploadSample */ = {
 			isa = PBXGroup;
 			children = (
+				4CC2567B204EC7BB00482672 /* vcs */,
 				EA64DE881C44072B00B68BCF /* test1.jpg */,
 				EA64DE891C44072B00B68BCF /* test2.jpg */,
 				EA09FA951C43B1FC00328EBB /* AppDelegate.h */,
 				EA09FA961C43B1FC00328EBB /* AppDelegate.m */,
-				EA09FA981C43B1FC00328EBB /* ViewController.h */,
-				EA09FA991C43B1FC00328EBB /* ViewController.m */,
 				EA09FA9B1C43B1FC00328EBB /* Main.storyboard */,
 				EA09FA9E1C43B1FC00328EBB /* Assets.xcassets */,
 				EA09FAA01C43B1FC00328EBB /* LaunchScreen.storyboard */,
