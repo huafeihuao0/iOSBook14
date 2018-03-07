@@ -1,17 +1,3 @@
-//
-//  ViewController.m
-//  APPClient
-//
-//  Created by 关东升 on 16/1/16.
-//  本书网站：http://www.51work6.com
-//  智捷课堂在线课堂：http://www.zhijieketang.com/
-//  智捷课堂微信公共号：zhijieketang
-//  作者微博：@tony_关东升
-//  作者微信：tony关东升
-//  QQ：569418560 邮箱：eorient@sina.com
-//  QQ交流群：162030268
-//
-
 #import "ViewController.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <CoreLocation/CoreLocation.h>
@@ -39,6 +25,7 @@
     
     [self.locationManager requestAlwaysAuthorization];
     
+    //实例化ibeacon围栏客户端
     NSUUID* uuid = [[NSUUID alloc] initWithUUIDString: kUUID];
     self.region = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:kID];
     
@@ -46,8 +33,11 @@
     self.lblRanging.text = @"";
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+    
+    
     //开启区域（或围栏）监视
     [self.locationManager startMonitoringForRegion:self.region];
     //开启Beacon距离检测
@@ -56,6 +46,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    
     //停止区域（或围栏）监视
     [self.locationManager stopMonitoringForRegion:self.region];
     //停止Beacon距离检测
@@ -67,7 +58,13 @@
 }
 
 #pragma --实现CLLocationManagerDelegate委托协议
-- (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region {
+/***
+ * 定位改变了围栏状态
+ ****/
+- (void)locationManager:(CLLocationManager *)manager
+      didDetermineState:(CLRegionState)state //与围栏之间的状态
+              forRegion:(CLRegion *)region//围栏
+{
     
     switch (state) {
         case CLRegionStateInside:
@@ -81,25 +78,43 @@
     }
 }
 
-- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
+/***
+ * 进入围栏
+ ****/
+- (void)locationManager:(CLLocationManager *)manager
+         didEnterRegion:(CLRegion *)region
+{
     self.lblRegion.text = @"进入围栏外";
 }
 
-- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
+/***
+ * 退出围栏
+ ****/
+- (void)locationManager:(CLLocationManager *)manager
+          didExitRegion:(CLRegion *)region
+{
     self.lblRegion.text = @"退出围栏";
 }
 
-- (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray<CLBeacon *> *)aryBeacons inRegion:(CLBeaconRegion *)region {
-    
+/***
+ * 与围栏间的距离
+ ****/
+- (void)locationManager:(CLLocationManager *)manager
+        didRangeBeacons:(NSArray<CLBeacon *> *)aryBeacons
+               inRegion:(CLBeaconRegion *)region
+{
+    //建言过滤
     NSPredicate* predicate = [NSPredicate predicateWithFormat:@"proximity = %d", CLProximityUnknown];
     NSArray *unknownBeacons = [aryBeacons filteredArrayUsingPredicate:predicate];
-    if (unknownBeacons.count > 0) {
+    if (unknownBeacons.count > 0)
+    {
         self.lblRanging.text = @"未检测到";
     }
     
     predicate = [NSPredicate predicateWithFormat:@"proximity = %d", CLProximityImmediate];
     NSArray *immediateBeacons = [aryBeacons filteredArrayUsingPredicate:predicate];
-    if (immediateBeacons.count > 0) {
+    if (immediateBeacons.count > 0)
+    {
         self.lblRanging.text = @"最接近";
     }
     
