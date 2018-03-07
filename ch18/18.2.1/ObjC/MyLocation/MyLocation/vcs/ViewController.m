@@ -42,11 +42,14 @@
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager requestAlwaysAuthorization];
     
-    //开始定位
+    //视图启动时候就开启定位
     [self.locationManager startUpdatingLocation];
     NSLog(@"开始定位");
 }
 
+/***
+ * 收到内存警告时候停止定位
+ ****/
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     //停止定位
