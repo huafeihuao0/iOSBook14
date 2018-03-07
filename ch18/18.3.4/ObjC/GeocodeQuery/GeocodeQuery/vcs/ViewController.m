@@ -1,17 +1,3 @@
-//
-//  ViewController.m
-//  GeocodeQuery
-//
-//  Created by 关东升 on 16/1/15.
-//  本书网站：http://www.51work6.com
-//  智捷课堂在线课堂：http://www.zhijieketang.com/
-//  智捷课堂微信公共号：zhijieketang
-//  作者微博：@tony_关东升
-//  作者微信：tony关东升
-//  QQ：569418560 邮箱：eorient@sina.com
-//  QQ交流群：162030268
-//
-
 #import "ViewController.h"
 #import <CoreLocation/CoreLocation.h>
 
@@ -40,13 +26,15 @@
         return;
     }
     
+    //地理编码/解码器
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    
-    [geocoder geocodeAddressString:self.txtQueryKey.text completionHandler:^(NSArray<CLPlacemark *> * placemarks, NSError * error) {
-        
-        if (error) {
+    id onQueryFinished=^(NSArray<CLPlacemark *> * placemarks, NSError * error)
+    {
+        if (error)
+        {
             NSLog(@"Error is %@",error.localizedDescription);
-        } else if ([placemarks count] > 0) {
+        } else if ([placemarks count] > 0)
+        {
             
             CLPlacemark* placemark = placemarks[0];
             
@@ -58,10 +46,12 @@
             double lat = location.coordinate.latitude;
             
             self.txtView.text = [NSString stringWithFormat:@"经度：%3.5f \n纬度：%3.5f \n%@", lng, lat, name];
-            
         }
-        
-    }];
+    };
+    
+    //查询地址字符串的对应的地理编码
+    [geocoder geocodeAddressString:self.txtQueryKey.text
+                 completionHandler:onQueryFinished];
     //关闭键盘
     [self.txtQueryKey resignFirstResponder];
 

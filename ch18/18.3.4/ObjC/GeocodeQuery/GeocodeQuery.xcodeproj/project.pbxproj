@@ -39,6 +39,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4CB329D12050132500815EE5 /* vcs */ = {
+			isa = PBXGroup;
+			children = (
+				EA6399141C4902E700D2FDAA /* ViewController.h */,
+				EA6399151C4902E700D2FDAA /* ViewController.m */,
+			);
+			path = vcs;
+			sourceTree = "<group>";
+		};
 		EA6399021C4902E700D2FDAA = {
 			isa = PBXGroup;
 			children = (
@@ -58,10 +67,9 @@
 		EA63990D1C4902E700D2FDAA /* GeocodeQuery */ = {
 			isa = PBXGroup;
 			children = (
+				4CB329D12050132500815EE5 /* vcs */,
 				EA6399111C4902E700D2FDAA /* AppDelegate.h */,
 				EA6399121C4902E700D2FDAA /* AppDelegate.m */,
-				EA6399141C4902E700D2FDAA /* ViewController.h */,
-				EA6399151C4902E700D2FDAA /* ViewController.m */,
 				EA6399171C4902E700D2FDAA /* Main.storyboard */,
 				EA63991A1C4902E700D2FDAA /* Assets.xcassets */,
 				EA63991C1C4902E700D2FDAA /* LaunchScreen.storyboard */,
@@ -298,6 +306,7 @@
 				EA6399241C4902E700D2FDAA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
