@@ -44,6 +44,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C9891A620516437004FEF8B /* vcs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = vcs;
+			sourceTree = "<group>";
+		};
 		EA6399021C4902E700D2FDAA = {
 			isa = PBXGroup;
 			children = (
@@ -65,10 +72,11 @@
 		EA63990D1C4902E700D2FDAA /* GeocodeQuery */ = {
 			isa = PBXGroup;
 			children = (
-				EA6399111C4902E700D2FDAA /* AppDelegate.h */,
-				EA6399121C4902E700D2FDAA /* AppDelegate.m */,
 				EA6399141C4902E700D2FDAA /* ViewController.h */,
 				EA6399151C4902E700D2FDAA /* ViewController.m */,
+				4C9891A620516437004FEF8B /* vcs */,
+				EA6399111C4902E700D2FDAA /* AppDelegate.h */,
+				EA6399121C4902E700D2FDAA /* AppDelegate.m */,
 				EA6399171C4902E700D2FDAA /* Main.storyboard */,
 				EA63991A1C4902E700D2FDAA /* Assets.xcassets */,
 				EA63991C1C4902E700D2FDAA /* LaunchScreen.storyboard */,
