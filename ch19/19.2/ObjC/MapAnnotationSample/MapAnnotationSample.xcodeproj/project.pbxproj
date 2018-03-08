@@ -45,6 +45,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C397F4320515F59005CFDF7 /* vcs */ = {
+			isa = PBXGroup;
+			children = (
+				EAE93EFC1C4B2BB30084134F /* ViewController.h */,
+				EAE93EFD1C4B2BB30084134F /* ViewController.m */,
+			);
+			path = vcs;
+			sourceTree = "<group>";
+		};
+		4C397F4420515F7E005CFDF7 /* beans */ = {
+			isa = PBXGroup;
+			children = (
+				EAE93F191C4B38900084134F /* MyAnnotation.h */,
+				EAE93F1A1C4B38900084134F /* MyAnnotation.m */,
+			);
+			name = beans;
+			sourceTree = "<group>";
+		};
 		EAE93EEA1C4B2BB30084134F = {
 			isa = PBXGroup;
 			children = (
@@ -65,12 +83,10 @@
 		EAE93EF51C4B2BB30084134F /* MapAnnotationSample */ = {
 			isa = PBXGroup;
 			children = (
+				4C397F4420515F7E005CFDF7 /* beans */,
+				4C397F4320515F59005CFDF7 /* vcs */,
 				EAE93EF91C4B2BB30084134F /* AppDelegate.h */,
 				EAE93EFA1C4B2BB30084134F /* AppDelegate.m */,
-				EAE93F191C4B38900084134F /* MyAnnotation.h */,
-				EAE93F1A1C4B38900084134F /* MyAnnotation.m */,
-				EAE93EFC1C4B2BB30084134F /* ViewController.h */,
-				EAE93EFD1C4B2BB30084134F /* ViewController.m */,
 				EAE93EFF1C4B2BB30084134F /* Main.storyboard */,
 				EAE93F021C4B2BB30084134F /* Assets.xcassets */,
 				EAE93F041C4B2BB30084134F /* LaunchScreen.storyboard */,
