@@ -1,17 +1,3 @@
-//
-//  ViewController.m
-//  MapSample
-//
-//  Created by 关东升 on 16/1/16.
-//  本书网站：http://www.51work6.com
-//  智捷课堂在线课堂：http://www.zhijieketang.com/
-//  智捷课堂微信公共号：zhijieketang
-//  作者微博：@tony_关东升
-//  作者微信：tony关东升
-//  QQ：569418560 邮箱：eorient@sina.com
-//  QQ交流群：162030268
-//
-
 #import "ViewController.h"
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
@@ -24,10 +10,6 @@
 @end
 
 @implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
 
 - (void)viewWillAppear:(BOOL)animated {
     
@@ -42,18 +24,15 @@
     
     //授权
     self.locationManager = [[CLLocationManager alloc] init];
-    [self.locationManager requestWhenInUseAuthorization];
-    [self.locationManager requestAlwaysAuthorization];
+    [self.locationManager requestWhenInUseAuthorization]; //请求使用时
+    [self.locationManager requestAlwaysAuthorization];//请求每时
 
-    self.mapView.showsUserLocation = TRUE;
-    self.mapView.userLocation.title = @"我在这里！";
+    self.mapView.showsUserLocation = TRUE; //显示用户位置
+    self.mapView.userLocation.title = @"我在这里！"; //用户位置注释标题
     self.mapView.delegate = self;
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
 
 - (IBAction)selectMapViewType:(id)sender {
     
@@ -72,7 +51,12 @@
 }
 
 #pragma mark --实现MKMapViewDelegate协议
-- (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView {
+/***
+ * 地图加载完成回调
+ ****/
+- (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView
+{
+    //开启用户追踪模式
     mapView.userTrackingMode =  MKUserTrackingModeFollowWithHeading;
 }
 
